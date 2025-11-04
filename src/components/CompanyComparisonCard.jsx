@@ -21,6 +21,14 @@ const CompanyComparisonCard = () => {
                 { label: "Ortalama Yıllık Getiri", value: "27.45%" },
             ];
 
+    const tableRows = Array.from({ length: 7 }).map((_, i) => ({
+        name: `YAPI KREDİ PORTFÖY YÖNETİM A.Ş.`,
+        size: "23.33",
+        ret: "23.24",
+        averageFee: "33.44",
+        totalSize: "55",
+        vol: "21.34",
+    }));
     // Chart Data
     const chartItems =
         mode === "sector"
@@ -56,8 +64,8 @@ const CompanyComparisonCard = () => {
                         <button
                             onClick={() => setMode("sector")}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ease-in-out ${mode === "sector"
-                                    ? "bg-[#2563EB] text-white shadow-[0_0_15px_#2563EB]/50 scale-105"
-                                    : "bg-[#1E2B48] text-gray-300 hover:bg-[#2563EB]/70 hover:text-white"
+                                ? "bg-[#2563EB] text-white shadow-[0_0_15px_#2563EB]/50 scale-105"
+                                : "bg-[#1E2B48] text-gray-300 hover:bg-[#2563EB]/70 hover:text-white"
                                 }`}
                         >
                             Sektör ile Karşılaştırma
@@ -65,8 +73,8 @@ const CompanyComparisonCard = () => {
                         <button
                             onClick={() => setMode("company")}
                             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ease-in-out ${mode === "company"
-                                    ? "bg-[#2563EB] text-white shadow-[0_0_15px_#2563EB]/50 scale-105"
-                                    : "bg-[#1E2B48] text-gray-300 hover:bg-[#2563EB]/70 hover:text-white"
+                                ? "bg-[#2563EB] text-white shadow-[0_0_15px_#2563EB]/50 scale-105"
+                                : "bg-[#1E2B48] text-gray-300 hover:bg-[#2563EB]/70 hover:text-white"
                                 }`}
                         >
                             Şirketin Fonları Kendi İçinde Karşılaştırma
@@ -105,6 +113,42 @@ const CompanyComparisonCard = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* Table Section */}
+            <div className="bg-[#1E2B48] rounded-xl px-6 py-4 mt-4 text-white shadow-sm transition-all duration-300 ease-in-out w-full">
+              <div className="text-sm text-textPrimary font-medium mb-3">
+                Şirket Bazlı Karşılaştırma
+              </div>
+              <table className="min-w-full text-left text-sm text-textSecondary">
+                <thead>
+                  <tr className="text-xs text-textSecondary border-b border-border">
+                    <th className="py-3 px-2">Kurucu</th>
+                    <th className="py-3 px-2">Fon Sayısı</th>
+                    <th className="py-3 px-2">Toplam Büyüklük(TL)</th>
+                    <th className="py-3 px-2">Ortalama Getiri(%)</th>
+                    <th className="py-3 px2">Ortalama Ücreti(%)</th>
+                    <th className="py-3 px-2">Ortalama Volatilite(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableRows.map((r, idx) => (
+                    <tr
+                      key={idx}
+                      className={`border-b border-border hover:bg-highlight/10 transition`}
+                    >
+                      <td className="py-3 px-2 whitespace-nowrap text-textPrimary">
+                        {r.name}
+                      </td>
+                      <td className="py-3 px-2">{r.size}</td>
+                      <td className="py-3 px-2">{r.totalSize}</td>
+                      <td className="py-3 px-2">{r.ret}%</td>
+                      <td className="py-3 px-2">{r.averageFee}%</td>
+                      <td className="py-3 px-2">{r.vol}%</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
                 {/* Performance Chart */}
                 <PerformanceChart items={chartItems} />
